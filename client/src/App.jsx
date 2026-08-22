@@ -2,9 +2,16 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/guards/ProtectedRoute';
 import RoleGuard from './components/guards/RoleGuard';
+import AppShell from './components/layout/AppShell/AppShell';
+
+// Auth Pages
 import SignIn from './pages/auth/SignIn';
 import SignUp from './pages/auth/SignUp';
 import VerifyEmail from './pages/auth/VerifyEmail';
+
+// Phase 2 Pages
+import EmployeeDirectory from './pages/directory/EmployeeDirectory';
+import EmployeeProfile from './pages/profile/EmployeeProfile';
 
 // Placeholder components for future phases
 const DashboardPlaceholder = () => (
@@ -12,16 +19,15 @@ const DashboardPlaceholder = () => (
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100vh',
+    height: '100%',
     flexDirection: 'column',
     gap: '16px',
     background: 'var(--color-bg-app)',
   }}>
     <h1 style={{ color: 'var(--color-brand)' }}>🎉 Welcome to Dayflow!</h1>
     <p style={{ color: 'var(--color-text-muted)' }}>
-      You're authenticated. Dashboard coming in Phase 2.
+      You're authenticated. Full Dashboard coming in Phase 3.
     </p>
-    <LogoutButton />
   </div>
 );
 
@@ -30,39 +36,17 @@ const AdminPlaceholder = () => (
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100vh',
+    height: '100%',
     flexDirection: 'column',
     gap: '16px',
     background: 'var(--color-bg-app)',
   }}>
     <h1 style={{ color: 'var(--color-brand)' }}>🔧 Admin Dashboard</h1>
     <p style={{ color: 'var(--color-text-muted)' }}>
-      Admin panel coming in Phase 2.
+      Admin panel coming in Phase 3.
     </p>
-    <LogoutButton />
   </div>
 );
-
-const LogoutButton = () => {
-  const { signout } = useAuth();
-  return (
-    <button
-      onClick={signout}
-      style={{
-        padding: '10px 24px',
-        background: 'var(--color-brand)',
-        color: 'white',
-        border: 'none',
-        borderRadius: 'var(--radius-button)',
-        cursor: 'pointer',
-        fontWeight: 600,
-        fontSize: '14px',
-      }}
-    >
-      Sign Out
-    </button>
-  );
-};
 
 const App = () => {
   const { isAuthenticated, user } = useAuth();
@@ -92,27 +76,30 @@ const App = () => {
       />
       <Route path="/verify-email/:token" element={<VerifyEmail />} />
 
-      {/* ─── Employee Protected Routes ─── */}
+      {/* ─── Protected Routes (Wrapped in AppShell) ─── */}
       <Route
-        path="/dashboard"
         element={
           <ProtectedRoute>
-            <DashboardPlaceholder />
+            <AppShell />
           </ProtectedRoute>
         }
-      />
+      >
+        {/* General Routes */}
+        <Route path="/dashboard" element={<DashboardPlaceholder />} />
+        <Route path="/directory" element={<EmployeeDirectory />} />
+        <Route path="/profile" element={<EmployeeProfile />} />
+        <Route path="/profile/:id" element={<EmployeeProfile />} />
 
-      {/* ─── Admin Protected Routes ─── */}
-      <Route
-        path="/admin/dashboard"
-        element={
-          <ProtectedRoute>
+        {/* Admin Routes */}
+        <Route
+          path="/admin/dashboard"
+          element={
             <RoleGuard roles={['admin']}>
               <AdminPlaceholder />
             </RoleGuard>
-          </ProtectedRoute>
-        }
-      />
+          }
+        />
+      </Route>
 
       {/* ─── Catch-all ─── */}
       <Route
