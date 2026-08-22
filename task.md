@@ -1,23 +1,21 @@
 # Dayflow HRMS - Task Checklist
 
-## Phase 3: Leave Management
+## Phase 4: Attendance & Timesheets
 
 ### Backend
-- [x] Create `leaveController.js` (apply for leave, get my leaves, get all leaves, review leave)
-- [x] Implement write-through sync in `leaveController.review`: Upsert `Attendance` records with `status: 'Leave'` when approved.
-- [x] Create `leaveRoutes.js` and mount in `server/src/index.js`
-- [x] Add `Notification` creation in `leaveController.review` (approve/reject).
+- [x] Create `attendanceController.js` (check-in, check-out, me, all, reconcile)
+- [x] Create `attendanceRoutes.js` and mount in `server/src/index.js`
+- [x] Create `attendanceReconciler.js` (node-cron job) and start in `server/src/index.js`
 
 ### Client Foundation
-- [x] Create `MyLeave.jsx` page (Apply form, Leave history table, Balance cards).
-- [x] Create `LeaveAdmin.jsx` page (Pending requests queue, Approve/Reject modal).
+- [x] Create `MyAttendance.jsx` page (Check-in/out button, live timer, history table)
+- [x] Create `AttendanceAdmin.jsx` page (All employees table, filters, reconcile trigger)
 
 ### Client Integration
-- [x] Connect `MyLeave` to `/api/leave` and `/api/leave/me`
-- [x] Connect `LeaveAdmin` to `/api/leave` and `/api/leave/:id/review`
-- [x] Update `App.jsx` to include `/leave` and `/admin/leave` (with RoleGuard).
+- [x] Connect `MyAttendance` to `/api/attendance/check-in` and `/check-out` and `/me`
+- [x] Connect `AttendanceAdmin` to `/api/attendance`
+- [x] Update `App.jsx` to include `/attendance` and `/admin/attendance` (with RoleGuard)
 
 ### Verification
-- [ ] Verify employee can apply for leave.
-- [ ] Verify admin can approve leave and it creates Attendance records.
-- [ ] Verify admin can reject leave and it does not create Attendance records.
+- [ ] Verify employee can check in and check out
+- [ ] Verify admin can view all attendance records

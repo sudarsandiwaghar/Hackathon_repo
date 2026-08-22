@@ -7,6 +7,8 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
 const employeeRoutes = require('./routes/employees');
 const leaveRoutes = require('./routes/leave');
+const attendanceRoutes = require('./routes/attendance');
+const initCronJobs = require('./jobs/attendanceReconciler');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,9 +27,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // ─── API Routes ─────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
-
 app.use('/api/employees', employeeRoutes);
 app.use('/api/leave', leaveRoutes);
+app.use('/api/attendance', attendanceRoutes);
 // app.use('/api/attendance', attendanceRoutes);
 // app.use('/api/leave', leaveRoutes);
 // app.use('/api/payroll', payrollRoutes);
@@ -76,6 +78,7 @@ app.use((err, req, res, next) => {
 const startServer = async () => {
   try {
     await connectDB();
+    initCronJobs();
 
     app.listen(PORT, () => {
       console.log(`\n╔══════════════════════════════════════════╗`);

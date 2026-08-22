@@ -17,6 +17,10 @@ import EmployeeProfile from './pages/profile/EmployeeProfile';
 import MyLeave from './pages/leave/MyLeave';
 import LeaveAdmin from './pages/leave/LeaveAdmin';
 
+// Phase 4 Pages
+import MyAttendance from './pages/attendance/MyAttendance';
+import AttendanceAdmin from './pages/attendance/AttendanceAdmin';
+
 // Placeholder components for future phases
 const DashboardPlaceholder = () => (
   <div style={{
@@ -94,6 +98,7 @@ const App = () => {
         <Route path="/profile" element={<EmployeeProfile />} />
         <Route path="/profile/:id" element={<EmployeeProfile />} />
         <Route path="/leave" element={<MyLeave />} />
+        <Route path="/attendance" element={<MyAttendance />} />
 
         {/* Admin Routes */}
         <Route
@@ -109,6 +114,14 @@ const App = () => {
           element={
             <RoleGuard roles={['admin', 'hr']}>
               <LeaveAdmin />
+            </RoleGuard>
+          }
+        />
+        <Route
+          path="/admin/attendance"
+          element={
+            <RoleGuard roles={['admin', 'hr']}>
+              <AttendanceAdmin />
             </RoleGuard>
           }
         />

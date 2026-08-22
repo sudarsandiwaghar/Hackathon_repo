@@ -33,7 +33,7 @@ const AppShell = () => {
   const navLinks = [
     { to: isAdmin ? '/admin/dashboard' : '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/directory', icon: Users, label: 'Directory' },
-    { to: '/attendance', icon: CalendarCheck, label: 'Attendance' },
+    { to: isAdmin ? '/admin/attendance' : '/attendance', icon: CalendarCheck, label: 'Attendance' },
     { to: isAdmin ? '/admin/leave' : '/leave', icon: PlaneTakeoff, label: 'Leave' },
     { to: isAdmin ? '/admin/payroll' : '/payroll', icon: Wallet, label: 'Payroll' },
   ];
