@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 // Route imports
 const authRoutes = require('./routes/auth');
 const employeeRoutes = require('./routes/employees');
+const leaveRoutes = require('./routes/leave');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 
 app.use('/api/employees', employeeRoutes);
+app.use('/api/leave', leaveRoutes);
 // app.use('/api/attendance', attendanceRoutes);
 // app.use('/api/leave', leaveRoutes);
 // app.use('/api/payroll', payrollRoutes);

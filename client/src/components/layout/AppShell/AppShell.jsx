@@ -34,8 +34,8 @@ const AppShell = () => {
     { to: isAdmin ? '/admin/dashboard' : '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/directory', icon: Users, label: 'Directory' },
     { to: '/attendance', icon: CalendarCheck, label: 'Attendance' },
-    { to: '/leave', icon: PlaneTakeoff, label: 'Leave' },
-    { to: '/payroll', icon: Wallet, label: 'Payroll' },
+    { to: isAdmin ? '/admin/leave' : '/leave', icon: PlaneTakeoff, label: 'Leave' },
+    { to: isAdmin ? '/admin/payroll' : '/payroll', icon: Wallet, label: 'Payroll' },
   ];
 
   const getInitials = (firstName, lastName) => {

@@ -13,6 +13,10 @@ import VerifyEmail from './pages/auth/VerifyEmail';
 import EmployeeDirectory from './pages/directory/EmployeeDirectory';
 import EmployeeProfile from './pages/profile/EmployeeProfile';
 
+// Phase 3 Pages
+import MyLeave from './pages/leave/MyLeave';
+import LeaveAdmin from './pages/leave/LeaveAdmin';
+
 // Placeholder components for future phases
 const DashboardPlaceholder = () => (
   <div style={{
@@ -89,6 +93,7 @@ const App = () => {
         <Route path="/directory" element={<EmployeeDirectory />} />
         <Route path="/profile" element={<EmployeeProfile />} />
         <Route path="/profile/:id" element={<EmployeeProfile />} />
+        <Route path="/leave" element={<MyLeave />} />
 
         {/* Admin Routes */}
         <Route
@@ -96,6 +101,14 @@ const App = () => {
           element={
             <RoleGuard roles={['admin']}>
               <AdminPlaceholder />
+            </RoleGuard>
+          }
+        />
+        <Route
+          path="/admin/leave"
+          element={
+            <RoleGuard roles={['admin', 'hr']}>
+              <LeaveAdmin />
             </RoleGuard>
           }
         />

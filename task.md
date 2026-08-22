@@ -1,22 +1,23 @@
 # Dayflow HRMS - Task Checklist
 
-## Phase 2: Employee Management & Profiles
+## Phase 3: Leave Management
 
 ### Backend
-- [x] Create `employeeController.js` (getAll, getOne, updateMe, updateAsAdmin)
-- [x] Create `employeeRoutes.js` with correct auth and role guards
-- [x] Mount employee routes in `server/src/index.js`
+- [x] Create `leaveController.js` (apply for leave, get my leaves, get all leaves, review leave)
+- [x] Implement write-through sync in `leaveController.review`: Upsert `Attendance` records with `status: 'Leave'` when approved.
+- [x] Create `leaveRoutes.js` and mount in `server/src/index.js`
+- [x] Add `Notification` creation in `leaveController.review` (approve/reject).
 
 ### Client Foundation
-- [x] Create `AppShell` component (Sidebar + Topbar layout)
-- [x] Update `App.jsx` to use `AppShell` for protected routes
+- [x] Create `MyLeave.jsx` page (Apply form, Leave history table, Balance cards).
+- [x] Create `LeaveAdmin.jsx` page (Pending requests queue, Approve/Reject modal).
 
-### Client Pages
-- [x] Create `EmployeeDirectory` page (Card grid of employees)
-- [x] Create `EmployeeProfile` page (View and edit own profile)
-- [x] Create admin edit modal or page (Edit any employee)
-- [x] Add Avatar upload UI with direct Cloudinary or Multer upload integration
+### Client Integration
+- [x] Connect `MyLeave` to `/api/leave` and `/api/leave/me`
+- [x] Connect `LeaveAdmin` to `/api/leave` and `/api/leave/:id/review`
+- [x] Update `App.jsx` to include `/leave` and `/admin/leave` (with RoleGuard).
 
 ### Verification
-- [ ] Verify standard user can view directory but only edit themselves
-- [ ] Verify admin can edit all fields of any employee
+- [ ] Verify employee can apply for leave.
+- [ ] Verify admin can approve leave and it creates Attendance records.
+- [ ] Verify admin can reject leave and it does not create Attendance records.
