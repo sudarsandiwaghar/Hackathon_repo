@@ -1,0 +1,6 @@
+{
+  "name": "Dayflow HRMS",
+  "description": "Production-grade Human Resource Management System for modern workforces with attendance tracking, leave workflows, payroll, employee directory, and analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
