@@ -1,0 +1,441 @@
+/* ═══════════════════════════════════════════════════════════
+   DAYFLOW HRMS — Dark Plum Design System
+   ═══════════════════════════════════════════════════════════
+   Surface distribution: 70% white/warm-white · 20% charcoal/gray · 10% plum
+   Dark Plum is the brand accent, not the interface.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ─── Design Tokens ────────────────────────────────────────── */
+:root {
+  /* Brand Plum */
+  --color-brand: #4A1F45;
+  --color-brand-deep: #351532;
+  --color-brand-muted: #6F3C68;
+  --color-brand-dusty: #A77BA3;
+  --color-brand-pale: #F4EDF3;
+
+  /* Brand Gradient (hero/login/CTA ONLY — never on dashboard cards) */
+  --gradient-brand: linear-gradient(135deg, #351532 0%, #4A1F45 45%, #6F3C68 100%);
+
+  /* Surfaces */
+  --color-bg-app: #FAF9FB;
+  --color-bg-card: #FFFFFF;
+  --color-bg-sidebar: #351532;
+
+  /* Text */
+  --color-text-heading: #202124;
+  --color-text-body: #4B5563;
+  --color-text-muted: #5F6368;
+  --color-text-disabled: #9CA3AF;
+  --color-text-inverse: #FFFFFF;
+
+  /* Borders */
+  --color-border: #E6E1E5;
+  --color-border-subtle: #EEE9ED;
+  --color-border-focus: #6F3C68;
+
+  /* Status — NEVER use plum for status */
+  --color-success: #2E8B57;
+  --color-success-bg: #EAF6EF;
+  --color-success-text: #1B6B3F;
+
+  --color-warning: #D4932A;
+  --color-warning-bg: #FFF6E5;
+  --color-warning-text: #8B6914;
+
+  --color-error: #C84A4A;
+  --color-error-bg: #FDECEC;
+  --color-error-text: #9B2C2C;
+
+  --color-info: #4C6FA8;
+  --color-info-bg: #EDF3FB;
+  --color-info-text: #2C4A7C;
+
+  /* Charts — pulled from brand tokens for consistency */
+  --chart-primary: #4A1F45;
+  --chart-secondary: #6F3C68;
+  --chart-tertiary: #A77BA3;
+  --chart-quaternary: #D4932A;
+  --chart-quinary: #4C6FA8;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.8125rem;   /* 13px */
+  --font-size-base: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;        /* 16px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.25rem;     /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+  --font-size-4xl: 2.25rem;    /* 36px */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+
+  /* Spacing scale (multiples of 4) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-input: 8px;
+  --radius-button: 10px;
+  --radius-nav: 10px;
+  --radius-card: 16px;
+  --radius-panel: 20px;
+  --radius-full: 9999px;
+
+  /* Shadows — plum-tinted, restrained */
+  --shadow-sm: 0 1px 3px rgba(53, 21, 50, 0.04);
+  --shadow-card: 0 4px 12px rgba(53, 21, 50, 0.05);
+  --shadow-elevated: 0 10px 30px rgba(53, 21, 50, 0.08);
+  --shadow-dropdown: 0 8px 24px rgba(53, 21, 50, 0.12);
+
+  /* Animation timing */
+  --duration-micro: 150ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 400ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 72px;
+  --topbar-height: 64px;
+}
+
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-body);
+  background-color: var(--color-bg-app);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: var(--color-brand);
+  text-decoration: none;
+  transition: color var(--duration-micro) var(--ease-default);
+}
+
+a:hover {
+  color: var(--color-brand-deep);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ─── Scrollbar Styling ────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-dusty);
+}
+
+/* ─── Typography Utilities ─────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-heading);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
+h5 { font-size: var(--font-size-md); }
+h6 { font-size: var(--font-size-base); }
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-disabled {
+  color: var(--color-text-disabled);
+}
+
+.text-brand {
+  color: var(--color-brand);
+}
+
+/* ─── Status Badges (via data-status attribute) ────────────── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.status-badge[data-status="success"],
+.status-badge[data-status="Present"],
+.status-badge[data-status="Approved"],
+.status-badge[data-status="Paid"],
+.status-badge[data-status="Active"] {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+}
+
+.status-badge[data-status="warning"],
+.status-badge[data-status="Pending"],
+.status-badge[data-status="Half-day"] {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+}
+
+.status-badge[data-status="error"],
+.status-badge[data-status="Absent"],
+.status-badge[data-status="Rejected"] {
+  background: var(--color-error-bg);
+  color: var(--color-error-text);
+}
+
+.status-badge[data-status="info"],
+.status-badge[data-status="Leave"],
+.status-badge[data-status="Processed"] {
+  background: var(--color-info-bg);
+  color: var(--color-info-text);
+}
+
+/* ─── Card Base ────────────────────────────────────────────── */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--space-6);
+  transition: box-shadow var(--duration-fast) var(--ease-default),
+              transform var(--duration-fast) var(--ease-default);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-elevated);
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+}
+
+/* ─── Animation Keyframes ──────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes toastEnter {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastExit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* ─── Animation Utilities ──────────────────────────────────── */
+.animate-fade-in {
+  animation: fadeIn var(--duration-normal) var(--ease-default) both;
+}
+
+.animate-slide-up {
+  animation: slideInUp var(--duration-normal) var(--ease-default) both;
+}
+
+.animate-slide-right {
+  animation: slideInRight var(--duration-normal) var(--ease-default) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-normal) var(--ease-default) both;
+}
+
+/* Staggered card entrance — apply via inline style: animation-delay */
+.stagger-item {
+  animation: slideInUp var(--duration-normal) var(--ease-out) both;
+}
+
+/* ─── Loading Skeleton ─────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-border-subtle) 0%,
+    var(--color-bg-app) 50%,
+    var(--color-border-subtle) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-input);
+}
+
+.skeleton-text {
+  height: 14px;
+  margin-bottom: var(--space-2);
+}
+
+.skeleton-heading {
+  height: 24px;
+  width: 60%;
+  margin-bottom: var(--space-3);
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+}
+
+/* ─── Focus Styles ─────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* ─── Reduced Motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Responsive Breakpoints (reference) ───────────────────── */
+/* Mobile:  max-width: 639px   (375px target) */
+/* Tablet:  640px – 1023px     (768px target) */
+/* Laptop:  1024px – 1439px    (1366px target) */
+/* Desktop: 1440px+            */
